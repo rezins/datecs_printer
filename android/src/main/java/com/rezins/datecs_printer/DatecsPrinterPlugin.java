@@ -111,7 +111,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
 
       }else{
-        showToast(e.getMessage());
+        
         result.error("Error 101", "Error while get list bluetooth device","");
       }
 
