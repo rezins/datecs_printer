@@ -124,7 +124,6 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
         result.success(isConnect);
       }catch(Exception e){
-        e.printStackTrace();
         result.success(isConnect);
       }
 
@@ -196,10 +195,8 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
         mPrinter.flush();
       } catch (IOException e) {
-        e.printStackTrace();
         result.success(false);
       } catch (NullPointerException e){
-        e.printStackTrace();
         result.success(false);
       }
 
