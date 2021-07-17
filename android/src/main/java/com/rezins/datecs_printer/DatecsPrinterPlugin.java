@@ -3,8 +3,10 @@ package com.rezins.datecs_printer;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -32,6 +34,8 @@ import io.flutter.plugin.common.MethodChannel.Result;
 public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
   private MethodChannel channel;
+
+  private Context mContext;
 
   private Printer mPrinter;
   private ProtocolAdapter mProtocolAdapter;
@@ -107,6 +111,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
 
       }else{
+        showToast(e.getMessage());
         result.error("Error 101", "Error while get list bluetooth device","");
       }
 
@@ -120,6 +125,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(isConnect);
       }catch(Exception e){
         e.printStackTrace();
+        showToast(e.getMessage());
         result.success(isConnect);
       }
 
@@ -131,7 +137,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
 
       } catch (Exception e) {
-
+        showToast(e.getMessage());
       }
     }else if(call.method.equals("printImage")){
       int[] img = call.argument("img");
@@ -142,7 +148,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         mPrinter.flush();
 
       } catch (Exception e) {
-
+        showToast(e.getMessage());
       }
     }else if(call.method.equals("printText")){
       String charset = "ISO-8859-1";
@@ -185,6 +191,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         mPrinter.flush();
       } catch (IOException e) {
         e.printStackTrace();
+        showToast(e.getMessage());
       }
 
     }else if(call.method.equals("disconnectBluetooth")){
@@ -213,6 +220,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
       initializePrinter(mmInputStream, mmOutputStream);
       return true;
     }catch(Exception error){
+      showToast(error.getMessage());
       throw error;
     }
   }
@@ -237,6 +245,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
               channel.pullEvent();
             } catch (IOException e) {
               e.printStackTrace();
+              showToast(e.getMessage());
               break;
             }
           }
@@ -263,7 +272,11 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
 
     } catch (Exception e) {
-
+      showToast(e.getMessage());
     }
+  }
+
+  private void showToast(String message){
+    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
   }
 }
