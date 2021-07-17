@@ -33,9 +33,6 @@ class DatecsPrinter {
 
   static Future<bool> printText(List<String> args) async {
     try{
-      args.forEach((element) {
-        print(element);
-      });
       final bool result = await _channel.invokeMethod('printText',{"args":args});
       print(result);
       return result;
