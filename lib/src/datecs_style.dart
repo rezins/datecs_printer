@@ -8,7 +8,7 @@ class DatecsStyle{
   final DatecsAlign align;
   final DatecsSize size;
 
-  DatecsStyle({this.bold, this.underline, this.italic, this.wide = false,this.align, this.size});
+  DatecsStyle({this.bold = false, this.underline = false, this.italic = false, this.wide = false,this.align, this.size});
 
   const DatecsStyle.defaults({
     this.bold: false,

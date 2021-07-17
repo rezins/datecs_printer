@@ -64,7 +64,9 @@ class DatecsGenerate{
   }
 
   feed(int i){
-    args.add("feed%20${i * 200}");
+    for(int idx = 0; idx < i; i++){
+      args.add("{br}");
+    }
   }
 
   image(String base64){

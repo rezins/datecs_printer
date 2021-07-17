@@ -120,7 +120,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(isConnect);
       }catch(Exception e){
         e.printStackTrace();
-        result.error("Error 102", "Error while connect to bluetooth device","");
+        result.success(isConnect);
       }
 
     }else if(call.method.equals("testPrint")){

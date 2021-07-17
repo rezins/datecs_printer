@@ -16,9 +16,14 @@ class DatecsPrinter {
     return list;
   }
   static Future<bool> connectBluetooth(String address) async {
-    final bool result = await _channel.invokeMethod('connectBluetooth',{"address":address});
-    print(result);
-    return result;
+    try{
+      final bool result = await _channel.invokeMethod('connectBluetooth',{"address":address});
+      return result;
+    }on PlatformException catch (e) {
+      print("Failed to write bytes: '${e.message}'.");
+      return false;
+    }
+
   }
 
   static Future<void> get printTest async {
@@ -27,12 +32,18 @@ class DatecsPrinter {
   }
 
   static Future<bool> printText(List<String> args) async {
-    args.forEach((element) {
-      print(element);
-    });
-    final bool result = await _channel.invokeMethod('printText',{"args":args});
-    print(result);
-    return result;
+    try{
+      args.forEach((element) {
+        print(element);
+      });
+      final bool result = await _channel.invokeMethod('printText',{"args":args});
+      print(result);
+      return result;
+    }on PlatformException catch (e) {
+      print("Failed to write bytes: '${e.message}'.");
+      return false;
+    }
+
   }
 
   static Future<bool> printImage(Image img) async {
@@ -42,7 +53,12 @@ class DatecsPrinter {
   }
 
   static Future<bool> get disconnect async{
-    final bool result = await _channel.invokeMethod('disconnectBluetooth');
-    return result;
+    try{
+      final bool result = await _channel.invokeMethod('disconnectBluetooth');
+      return result;
+    }on PlatformException catch (e) {
+      print("Failed to write bytes: '${e.message}'.");
+      return false;
+    }
   }
 }
