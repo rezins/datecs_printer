@@ -125,7 +125,6 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(isConnect);
       }catch(Exception e){
         e.printStackTrace();
-        showToast(e.getMessage());
         result.success(isConnect);
       }
 
@@ -230,7 +229,6 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
       initializePrinter(mmInputStream, mmOutputStream);
       return true;
     }catch(Exception error){
-      showToast(error.getMessage());
       throw error;
     }
   }
@@ -255,7 +253,6 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
               channel.pullEvent();
             } catch (IOException e) {
               e.printStackTrace();
-              showToast(e.getMessage());
               break;
             }
           }
@@ -282,11 +279,8 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
 
     } catch (Exception e) {
-      showToast(e.getMessage());
+
     }
   }
 
-  private void showToast(String message){
-    Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
-  }
 }
