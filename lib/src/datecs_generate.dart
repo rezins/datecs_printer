@@ -64,9 +64,17 @@ class DatecsGenerate{
   }
 
   feed(int i){
-    for(int idx = 0; idx < i; i++){
+    for(int idx = 0; idx < i; idx++){
       args.add("{br}");
     }
+  }
+
+  hr({String char = '-'}){
+    String buffer="";
+    for(int i = 0; i < _getMaxCharsPerLine(); i++){
+      buffer += char;
+    }
+    args.add(buffer+"{br}");
   }
 
   image(String base64){
@@ -87,7 +95,7 @@ class DatecsGenerate{
           var tmp = cols[i].text.substring(0, max_char_col);
           text += textPrint(tmp, style: cols[i].styles, useRow: true);
       }else{
-        if(cols[i].styles.align == DatecsAlign.left){
+        if(cols[i].styles.align == DatecsAlign.left || cols[i].styles.align == DatecsAlign.center){
           int restStr = max_char_col - cols[i].text.length;
           var tmp = cols[i].text;
           for(int j = 0; j < restStr; j++){
