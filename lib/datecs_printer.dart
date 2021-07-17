@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +47,9 @@ class DatecsPrinter {
       final bool result = await _channel.invokeMethod('printText',{"args":args});
       print(result);
       return result;
+    }on IOException catch(e){
+      print("Failed to write bytes: '${e.toString()}'.");
+      return false;
     }on PlatformException catch (e) {
       print("Failed to write bytes: '${e.message}'.");
       return false;

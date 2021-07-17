@@ -141,10 +141,10 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
         mPrinter.printSelfTest();
         mPrinter.flush();
-
+        result.success(true);
 
       } catch (Exception e) {
-        showToast(e.getMessage());
+        result.success(false);
       }
     }else if(call.method.equals("printImage")){
       int[] img = call.argument("img");
@@ -155,7 +155,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         mPrinter.flush();
 
       } catch (Exception e) {
-        showToast(e.getMessage());
+
       }
     }else if(call.method.equals("printText")){
       String charset = "ISO-8859-1";
@@ -198,7 +198,10 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         mPrinter.flush();
       } catch (IOException e) {
         e.printStackTrace();
-        showToast(e.getMessage());
+        result.success(false);
+      } catch (NullPointerException e){
+        e.printStackTrace();
+        result.success(false);
       }
 
     }else if(call.method.equals("disconnectBluetooth")){

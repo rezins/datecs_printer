@@ -86,7 +86,7 @@ class _MyAppState extends State<MyApp> {
     var buffer = bytes.buffer;
     var m = base64Encode(Uint8List.view(buffer));
 
-    generate.image(m);
+    //generate.image(m);
     generate.feed(1);
 
     return generate.args;
@@ -122,7 +122,11 @@ class _MyAppState extends State<MyApp> {
               }, child: Text('Print Image', style: TextStyle(color: Colors.white),), fillColor: Colors.blue,),
               RawMaterialButton(onPressed: () async {
                 List<String> args = await testPrint();
-                await DatecsPrinter.printText(args);
+                var result = await DatecsPrinter.printText(args);
+                if(!result){
+                  await DatecsPrinter.connectBluetooth("00:01:90:C4:AC:23");
+                  var result = await DatecsPrinter.printText(args);
+                }
               }, child: Text('Print Txt', style: TextStyle(color: Colors.white),), fillColor: Colors.blue,),
               Text('This is test print text', style: TextStyle(fontSize: 16),),
               SizedBox(height: 30,),
