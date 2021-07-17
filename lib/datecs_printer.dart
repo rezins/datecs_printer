@@ -26,6 +26,16 @@ class DatecsPrinter {
 
   }
 
+  static Future<bool> get connectionStatus async {
+    try {
+      final bool result = await _channel.invokeMethod('connectionStatus');
+      return result;
+    } on PlatformException catch (e) {
+      print("Failed to write bytes: '${e.message}'.");
+      return Future.value(false);
+    }
+  }
+
   static Future<void> get printTest async {
     final bool result = await _channel.invokeMethod('testPrint');
     return Future.value();
