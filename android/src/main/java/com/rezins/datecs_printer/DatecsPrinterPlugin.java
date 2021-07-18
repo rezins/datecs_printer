@@ -123,6 +123,8 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         }
 
         result.success(isConnect);
+      }catch(IOException e){
+        result.success(isConnect);
       }catch(Exception e){
         result.success(isConnect);
       }
@@ -201,7 +203,12 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
       }
 
     }else if(call.method.equals("disconnectBluetooth")){
-      disconnect();
+      try{
+        disconnect();
+        result.success(true);
+      }catch(IOException e){
+        result.success(false);
+      }
     }else {
       result.notImplemented();
     }
@@ -243,13 +250,13 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
             try {
               Thread.sleep(50);
             } catch (InterruptedException e) {
-              e.printStackTrace();
+
             }
 
             try {
               channel.pullEvent();
             } catch (IOException e) {
-              e.printStackTrace();
+
               break;
             }
           }
@@ -262,7 +269,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
 
   }
 
-  public void disconnect() {
+  public void disconnect() throws IOException{
     try {
       mmSocket.close();
 
