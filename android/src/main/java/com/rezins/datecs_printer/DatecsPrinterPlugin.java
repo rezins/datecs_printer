@@ -67,7 +67,11 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
     public void onPaperReady(boolean state) {
       if (state) {
       } else {
-        disconnect();
+        try {
+          disconnect();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
     }
 
