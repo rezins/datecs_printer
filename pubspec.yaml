@@ -1,5 +1,5 @@
 name: datecs_printer
-description: Flutter plugin for datecs printer
+description: This plugin allows to print receipts using datecs printer 
 version: 0.0.1
 homepage: https://github.com/rezins/datecs_printer.git
 
