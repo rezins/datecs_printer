@@ -157,3 +157,4 @@ var result = await DatecsPrinter.printText(ticket);
 For a complete example, check the demo project inside examplem forder
 
 # Test Print
+<img src="https://github.com/rezins/datecs_printer/blob/main/example/assets/datecs_receipt.jpg?raw=true" alt="test receipt" height="800" width="800"/>
