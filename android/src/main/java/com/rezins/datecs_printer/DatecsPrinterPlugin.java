@@ -125,7 +125,6 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         if (BluetoothAdapter.checkBluetoothAddress(address)) {
           isConnect = connect(address);
         }
-
         result.success(isConnect);
       }catch(IOException e){
         result.success(isConnect);
@@ -133,33 +132,20 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
         result.success(isConnect);
       }
 
-    }else if(call.method.equals("connectionStatus")){
+    }else if(call.method.equals("disconnectBluetooth")){
       try{
-        mPrinter.reset();
+        disconnect();
         result.success(true);
-      }catch(Exception e){
+      }catch(IOException e){
         result.success(false);
       }
     }else if(call.method.equals("testPrint")){
       try {
-
         mPrinter.printSelfTest();
         mPrinter.flush();
         result.success(true);
-
       } catch (Exception e) {
         result.success(false);
-      }
-    }else if(call.method.equals("printImage")){
-      int[] img = call.argument("img");
-      try {
-        mPrinter.reset();
-        mPrinter.printImage(img, 300, 300, Printer.ALIGN_CENTER, true);
-        mPrinter.feedPaper(110);
-        mPrinter.flush();
-
-      } catch (Exception e) {
-
       }
     }else if(call.method.equals("printText")){
       String charset = "ISO-8859-1";
@@ -196,21 +182,10 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
             mPrinter.printTaggedText(args.get(i));
           }
         }
-
-
-
         mPrinter.flush();
       } catch (IOException e) {
         result.success(false);
       } catch (NullPointerException e){
-        result.success(false);
-      }
-
-    }else if(call.method.equals("disconnectBluetooth")){
-      try{
-        disconnect();
-        result.success(true);
-      }catch(IOException e){
         result.success(false);
       }
     }else {
@@ -224,7 +199,6 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
   }
 
   public boolean connect(String address) throws IOException {
-
     try{
       BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
       BluetoothDevice device = adapter.getRemoteDevice(address);
@@ -254,9 +228,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
             try {
               Thread.sleep(50);
             } catch (InterruptedException e) {
-
             }
-
             try {
               channel.pullEvent();
             } catch (IOException e) {

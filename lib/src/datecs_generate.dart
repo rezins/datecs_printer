@@ -1,7 +1,4 @@
-
-
 import 'package:datecs_printer/src/datecs_style.dart';
-
 import 'datecs_column.dart';
 import 'enums.dart';
 
@@ -9,7 +6,7 @@ class DatecsGenerate{
   final DatecsPaper _paperSize;
   int _maxCharsPerLine;
   DatecsStyle _styles = DatecsStyle.defaults();
-  List<String> args = new List<String>();
+  List<String> args = [];
 
   DatecsGenerate(this._paperSize);
 
@@ -120,6 +117,4 @@ class DatecsGenerate{
     args.add(text);
 
   }
-
-
 }
