@@ -183,6 +183,7 @@ public class DatecsPrinterPlugin implements FlutterPlugin, MethodCallHandler {
           }
         }
         mPrinter.flush();
+        result.success(true);
       } catch (IOException e) {
         result.success(false);
       } catch (NullPointerException e){
