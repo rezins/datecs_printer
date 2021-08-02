@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Future<List<String>> getTicketDatecs({bool withImage}) async{
+  Future<List<String>> getTicketDatecs({bool withImage = false}) async{
     final generate = DatecsGenerate(DatecsPaper.mm80);
 
     if(withImage){
@@ -276,7 +276,7 @@ class _MyAppState extends State<MyApp> {
                 RawMaterialButton(
                   fillColor: Colors.blue,
                   onPressed: () async{
-                    List<String> ticket = await getTicketDatecs();
+                    List<String> ticket = await getTicketDatecs(withImage: false);
                     var result = await DatecsPrinter.printText(ticket);
                   },
                   child: const Padding(
