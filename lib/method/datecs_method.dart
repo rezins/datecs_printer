@@ -14,15 +14,14 @@ class DatecsPrinter {
   }
   static Future<List<dynamic>> get getListBluetoothDevice async {
     final List<dynamic> list = await _channel.invokeMethod('getListBluetoothDevice');
-    return Future.value(list);;
+    return list;
   }
   static Future<bool> connectBluetooth(String address) async {
     try{
       final bool result = await _channel.invokeMethod('connectBluetooth',{"address":address});
-      return Future.value(result);
-    }on PlatformException catch (e) {
-      print("Failed to write bytes: '${e.message}'.");
-      return Future.value(false);
+      return result;
+    }catch(e){
+      return false;
     }
 
   }
@@ -35,13 +34,10 @@ class DatecsPrinter {
   static Future<bool> printText(List<String> args) async {
     try{
       final bool result = await _channel.invokeMethod('printText',{"args":args});
-      return Future.value(result);;
-    }on IOException catch(e){
-      print("Failed to write bytes: '${e.toString()}'.");
-      return Future.value(false);
-    }on PlatformException catch (e) {
-      print("Failed to write bytes: '${e.message}'.");
-      return Future.value(false);
+      print(result);
+      return result;
+    }catch(e){
+      return false;
     }
 
   }
