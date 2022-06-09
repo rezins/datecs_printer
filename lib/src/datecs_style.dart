@@ -8,7 +8,7 @@ class DatecsStyle{
   final DatecsAlign align;
   final DatecsSize size;
 
-  DatecsStyle({this.bold = false, this.underline = false, this.italic = false, this.wide = false,this.align, this.size});
+  DatecsStyle({this.bold = false, this.underline = false, this.italic = false, this.wide = false, this.align = DatecsAlign.left, this.size = DatecsSize.normal});
 
   const DatecsStyle.defaults({
     this.bold: false,
@@ -20,14 +20,14 @@ class DatecsStyle{
   });
 
   DatecsStyle copyWith({
-    bool bold,
-    bool underline,
-    bool italic,
-    bool wide,
-    bool br,
-    bool reset,
-    DatecsAlign align,
-    DatecsSize size,
+    bool? bold,
+    bool? underline,
+    bool? italic,
+    bool? wide,
+    bool? br,
+    bool? reset,
+    DatecsAlign? align,
+    DatecsSize? size,
   }) {
     return DatecsStyle(
       bold: bold ?? this.bold,

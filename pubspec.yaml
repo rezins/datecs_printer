@@ -1,10 +1,10 @@
 name: datecs_printer
-description: This plugin allows to print receipts using datecs printer
-version: 0.0.3
+description: This plugin allows to print receipts using datecs printer also provide datecs utils to create print receipt more easier
+version: 0.0.4
 homepage: https://github.com/rezins/datecs_printer.git
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.16.2 <3.0.0"
   flutter: ">=1.20.0"
 
 dependencies:

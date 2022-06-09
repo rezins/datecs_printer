@@ -9,11 +9,11 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -22,8 +22,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   List availableBluetoothDevices =[];
-  DatecsDevice _device;
-  bool connected;
+  DatecsDevice? _device;
+  bool connected = false;
 
   @override
   void initState() {
@@ -237,7 +237,7 @@ class _MyAppState extends State<MyApp> {
                         items: _getDeviceItems(),
                         onChanged: (value) async {
                           setState(() {
-                            _device = value;
+                            _device = value as DatecsDevice;
                           });
                         }, //_disconnect
                         value: _device,
@@ -258,8 +258,12 @@ class _MyAppState extends State<MyApp> {
                 FlatButton(
                   color: Theme.of(context).primaryColor,
                   onPressed: () async {
+                    if(_device == null){
+                      Fluttertoast.showToast(msg: "Device not selected");
+                      return;
+                    }
                     try{
-                      var result = await DatecsPrinter.connectBluetooth(_device.address);
+                      var result = await DatecsPrinter.connectBluetooth(_device!.address);
                       if(result){
                         Fluttertoast.showToast(msg: "Device connected");
                       }

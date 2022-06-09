@@ -1,9 +1,7 @@
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/services.dart';
-import 'package:flutter/material.dart';
 
 class DatecsPrinter {
   static const MethodChannel _channel = MethodChannel('datecs_printer');
