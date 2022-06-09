@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Migrate nullsafety
+
 ## 0.0.3
 
 * Fix return value then finish print text
