@@ -12,6 +12,8 @@ class DatecsGenerate{
   int _getMaxCharsPerLine() {
     if (_paperSize == DatecsPaper.mm58) {
       return 32;
+    }else if(_paperSize == DatecsPaper.mm116) {
+      return 68;
     } else {
       return 48;
     }
@@ -79,14 +81,14 @@ class DatecsGenerate{
   }
 
   row(List<DatecsColumn> cols){
-    final isSumValid = cols.fold(0, (int sum, col) => sum + col.width) == 12;
+    final isSumValid = cols.fold(0, (int sum, col) => sum + col.width) == getDivider();
     if (!isSumValid) {
-      throw Exception('Total columns width must be equal to 12');
+      throw Exception('Total columns width must be equal to ${getDivider()}');
     }
     String text= "";
     int max_char = _getMaxCharsPerLine();
     for (int i = 0; i < cols.length; ++i) {
-      int max_char_col = ((max_char / 12) * cols[i].width).floor();
+      int max_char_col = ((max_char / getDivider()) * cols[i].width).floor();
 
       if(cols[i].text.length > max_char_col){
           var tmp = cols[i].text.substring(0, max_char_col);
@@ -116,5 +118,13 @@ class DatecsGenerate{
 
     args.add(text);
 
+  }
+
+  int getDivider(){
+    if(_paperSize == DatecsPaper.mm80){
+      return 12;
+    }else{
+      return 8;
+    }
   }
 }

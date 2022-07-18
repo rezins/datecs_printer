@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Add Paper Size 116mm
+
 ## 0.0.4
 
 * Migrate nullsafety
