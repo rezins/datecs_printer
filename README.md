@@ -17,6 +17,7 @@ These models were reported as working as expected:
 - DATECS DPP 450
 - EPSON TM P80
 - Bixolon SPP-R210
+- Bixolon SPP-R310 
 - MPT-3 (JP Printer)
 - MPT-III (LEOPARDO A7)
 - MPT-II (58mm)
